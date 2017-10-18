@@ -1,0 +1,1294 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ include file="common/DConnection.jsp"%>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="js/jquery-1.11.1.min.js">
+ header( "Pragma: no-cache" );
+   header( "Cache-Control: no-cache" );
+   header(  "Expires: 0" );
+   
+   </script>
+<title>Trabaajo</title>
+<link rel="icon" href="images/trab.png" />
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript">
+//checkAccess session start
+<%
+Object value = session.getAttribute("recruiterID");
+		if(value==null){
+			session.setAttribute("recruiterLoginMessage",null);
+			   response.sendRedirect("Recruiter_login.jsp");
+		} 
+%>
+//checkAccess session end
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,3); } 
+		
+</script>
+<!-- //for-mobile-apps -->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link href="bootsrap_css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" media="all" />
+<link href="css/font-awesome.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link rel="stylesheet" href="css/chocolat.css" type="text/css"
+	media="screen">
+<!-- chocolate css for gallery light box-->
+<!-- animation -->
+<link href="css/animate.css" rel="stylesheet" type="text/css"
+	media="all">
+<!-- //animation -->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+<link href="common_style/common_style.css" rel="stylesheet"
+	type="text/css" media="all" />
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event) {
+			event.preventDefault();
+			$('html,body').animate({
+				scrollTop : $(this.hash).offset().top
+			}, 10);
+		});
+	});
+</script>
+
+
+
+<!-- onlinefonts -->
+<link href="//fonts.googleapis.com/css?family=Dancing+Script:400,700"
+	rel="stylesheet">
+<link
+	href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700"
+	rel="stylesheet">
+<!-- //onlinefonts -->
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+
+<!-- start bootsrap -->
+<!--  end bootsrap -->
+
+
+<!-- start menu bar -->
+<link href="common_style/navbar.css" rel="stylesheet" type="text/css"
+	media="all" />
+
+<!--  end menu bar -->
+
+<!--  start main content -->
+<link href="common_style/style.css" rel="stylesheet" type="text/css"
+	media="all" />
+<!-- end main content -->
+
+
+<!-- start social media -->
+<link rel="stylesheet" href="css/socialmedia.css">
+<script type="text/javascript" src="js/socialmedia.js"></script>
+<!--    end social media -->
+
+
+<!-- start popup dialog box -->
+<link rel="stylesheet" href="css/popupDialog.css">
+<!--   end popup dialog box -->
+
+
+
+<script>
+	function putvalue() {
+		var changevalue = document.forms['companyinfo']['c1'].value;
+		if (changevalue == "sameaddress") {
+			var changevalue = document.forms['companyinfo']['headofficeaddress'].value;
+			document.getElementById("currentaddress").innerHTML = changevalue;
+		}
+	}
+</script>
+
+
+<style type="text/css">
+#page_navigation4 a {
+	padding: 3px;
+	border: 1px solid gray;
+	margin: 2px;
+	color: black;
+	text-decoration: none
+}
+
+.active_page4 {
+	background: #ed1c24;
+	color: white !important;
+}
+</style>
+
+<style type="text/css">
+#page_navigation2 a {
+	padding: 3px;
+	border: 1px solid gray;
+	margin: 2px;
+	color: black;
+	text-decoration: none
+}
+
+.active_page2 {
+	background: #ed1c24;
+	color: white !important;
+}
+</style>
+
+<style type="text/css">
+#page_navigation3 a {
+	padding: 3px;
+	border: 1px solid gray;
+	margin: 2px;
+	color: black;
+	text-decoration: none
+}
+
+.active_page3 {
+	background: #ed1c24;
+	color: white !important;
+}
+</style>
+
+<style type="text/css">
+#page_navigation1 a {
+	padding: 3px;
+	border: 1px solid gray;
+	margin: 2px;
+	color: black;
+	text-decoration: none
+}
+
+.active_page1 {
+	background: #ed1c24;
+	color: white !important;
+}
+</style>
+
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+
+						var show_per_page4 = 3;
+						//getting the amount of elements inside content div
+						var number_of_items4 = $('#content4').children().size();
+						//calculate the number of pages we are going to have
+						var number_of_pages4 = Math.ceil(number_of_items4
+								/ show_per_page4);
+
+						//set the value of our hidden input fields
+						$('#current_page4').val(0);
+						$('#show_per_page4').val(show_per_page4);
+
+						//now when we got all we need for the navigation let's make it '
+
+						/* 
+						what are we going to have in the navigation?
+							- link to previous page
+							- links to specific pages
+							- link to next page
+						 */
+						var navigation_html4 = '<a class="previous_link4" href="javascript:previous4();">Prev</a>';
+						var current_link4 = 0;
+						while (number_of_pages4 > current_link4) {
+							navigation_html4 += '<a class="page_link4" href="javascript:go_to_page4('
+									+ current_link4
+									+ ')" longdesc4="'
+									+ current_link4
+									+ '">'
+									+ (current_link4 + 1) + '</a>';
+							current_link4++;
+						}
+						navigation_html4 += '<a class="next_link4" href="javascript:next4();">Next</a>';
+
+						$('#page_navigation4').html(navigation_html4);
+
+						//add active_page class to the first page link
+						$('#page_navigation4 .page_link4:first').addClass(
+								'active_page4');
+
+						//hide all the elements inside content div
+						$('#content4').children().css('display', 'none');
+
+						//and show the first n (show_per_page) elements
+						$('#content4').children().slice(0, show_per_page4).css(
+								'display', 'block');
+
+						var show_per_page3 = 5;
+						//getting the amount of elements inside content div
+						var number_of_items3 = $('#content3').children().size();
+						//calculate the number of pages we are going to have
+						var number_of_pages3 = Math.ceil(number_of_items3
+								/ show_per_page3);
+
+						//set the value of our hidden input fields
+						$('#current_page3').val(0);
+						$('#show_per_page3').val(show_per_page3);
+
+						//now when we got all we need for the navigation let's make it '
+
+						/* 
+						what are we going to have in the navigation?
+							- link to previous page
+							- links to specific pages
+							- link to next page
+						 */
+						var navigation_html3 = '<a class="previous_link3" href="javascript:previous3();">Prev</a>';
+						var current_link3 = 0;
+						while (number_of_pages3 > current_link3) {
+							navigation_html3 += '<a class="page_link3" href="javascript:go_to_page3('
+									+ current_link3
+									+ ')" longdesc3="'
+									+ current_link3
+									+ '">'
+									+ (current_link3 + 1) + '</a>';
+							current_link3++;
+						}
+						navigation_html3 += '<a class="next_link3" href="javascript:next3();">Next</a>';
+
+						$('#page_navigation3').html(navigation_html3);
+
+						//add active_page class to the first page link
+						$('#page_navigation3 .page_link3:first').addClass(
+								'active_page3');
+
+						//hide all the elements inside content div
+						$('#content3').children().css('display', 'none');
+
+						//and show the first n (show_per_page) elements
+						$('#content3').children().slice(0, show_per_page3).css(
+								'display', 'block');
+
+						//how much items per page to show
+						var show_per_page2 = 4;
+						//getting the amount of elements inside content div
+						var number_of_items2 = $('#content2').children().size();
+						//calculate the number of pages we are going to have
+						var number_of_pages2 = Math.ceil(number_of_items2
+								/ show_per_page2);
+
+						//set the value of our hidden input fields
+						$('#current_page2').val(0);
+						$('#show_per_page2').val(show_per_page2);
+
+						//now when we got all we need for the navigation let's make it '
+
+						/* 
+						what are we going to have in the navigation?
+							- link to previous page
+							- links to specific pages
+							- link to next page
+						 */
+						var navigation_html2 = '<a class="previous_link2" href="javascript:previous2();">Prev</a>';
+						var current_link2 = 0;
+						while (number_of_pages2 > current_link2) {
+							navigation_html2 += '<a class="page_link2" href="javascript:go_to_page2('
+									+ current_link2
+									+ ')" longdesc2="'
+									+ current_link2
+									+ '">'
+									+ (current_link2 + 1) + '</a>';
+							current_link2++;
+						}
+						navigation_html2 += '<a class="next_link2" href="javascript:next2();">Next</a>';
+
+						$('#page_navigation2').html(navigation_html2);
+
+						//add active_page class to the first page link
+						$('#page_navigation2 .page_link2:first').addClass(
+								'active_page2');
+
+						//hide all the elements inside content div
+						$('#content2').children().css('display', 'none');
+
+						//and show the first n (show_per_page) elements
+						$('#content2').children().slice(0, show_per_page2).css(
+								'display', 'block');
+
+						var show_per_page1 = 4;
+						//getting the amount of elements inside content div
+						var number_of_items1 = $('#content1').children().size();
+						//calculate the number of pages we are going to have
+						var number_of_pages1 = Math.ceil(number_of_items1
+								/ show_per_page1);
+
+						//set the value of our hidden input fields
+						$('#current_page1').val(0);
+						$('#show_per_page1').val(show_per_page1);
+
+						//now when we got all we need for the navigation let's make it '
+
+						/* 
+						what are we going to have in the navigation?
+							- link to previous page
+							- links to specific pages
+							- link to next page
+						 */
+						var navigation_html1 = '<a class="previous_link1" href="javascript:previous1();">Prev</a>';
+						var current_link1 = 0;
+						while (number_of_pages1 > current_link1) {
+							navigation_html1 += '<a class="page_link1" href="javascript:go_to_page1('
+									+ current_link1
+									+ ')" longdesc1="'
+									+ current_link1
+									+ '">'
+									+ (current_link1 + 1) + '</a>';
+							current_link1++;
+						}
+						navigation_html1 += '<a class="next_link1" href="javascript:next1();">Next</a>';
+
+						$('#page_navigation1').html(navigation_html1);
+
+						//add active_page class to the first page link
+						$('#page_navigation1 .page_link1:first').addClass(
+								'active_page1');
+
+						//hide all the elements inside content div
+						$('#content1').children().css('display', 'none');
+
+						//and show the first n (show_per_page) elements
+						$('#content1').children().slice(0, show_per_page1).css(
+								'display', 'block');
+
+					});
+
+	function previous4() {
+
+		new_page4 = parseInt($('#current_page4').val()) - 1;
+		//if there is an item before the current active link run the function
+		if ($('.active_page4').prev('.page_link4').length == true) {
+			go_to_page4(new_page4);
+		}
+
+	}
+
+	function next4() {
+		new_page4 = parseInt($('#current_page4').val()) + 1;
+		//if there is an item after the current active link run the function
+		if ($('.active_page4').next('.page_link4').length == true) {
+			go_to_page3(new_page4);
+		}
+
+	}
+	function go_to_page4(page_num4) {
+		//get the number of items shown per page
+		var show_per_page4 = parseInt($('#show_per_page4').val());
+
+		//get the element number where to start the slice from
+		start_from4 = page_num4 * show_per_page4;
+
+		//get the element number where to end the slice
+		end_on4 = start_from4 + show_per_page4;
+
+		//hide all children elements of content div, get specific items and show them
+		$('#content4').children().css('display', 'none').slice(start_from4,
+				end_on4).css('display', 'block');
+
+		/*get the page link that has longdesc attribute of the current page and add active_page class to it
+		and remove that class from previously active page link*/
+		$('.page_link4[longdesc4=' + page_num4 + ']').addClass('active_page4')
+				.siblings('.active_page4').removeClass('active_page4');
+
+		//update the current page input field
+		$('#current_page4').val(page_num4);
+	}
+	/* ********************************* */
+	function previous3() {
+
+		new_page3 = parseInt($('#current_page3').val()) - 1;
+		//if there is an item before the current active link run the function
+		if ($('.active_page3').prev('.page_link3').length == true) {
+			go_to_page3(new_page3);
+		}
+
+	}
+
+	function next3() {
+		new_page3 = parseInt($('#current_page3').val()) + 1;
+		//if there is an item after the current active link run the function
+		if ($('.active_page3').next('.page_link3').length == true) {
+			go_to_page3(new_page3);
+		}
+
+	}
+	function go_to_page3(page_num3) {
+		//get the number of items shown per page
+		var show_per_page3 = parseInt($('#show_per_page3').val());
+
+		//get the element number where to start the slice from
+		start_from3 = page_num3 * show_per_page3;
+
+		//get the element number where to end the slice
+		end_on3 = start_from3 + show_per_page3;
+
+		//hide all children elements of content div, get specific items and show them
+		$('#content3').children().css('display', 'none').slice(start_from3,
+				end_on3).css('display', 'block');
+
+		/*get the page link that has longdesc attribute of the current page and add active_page class to it
+		and remove that class from previously active page link*/
+		$('.page_link3[longdesc3=' + page_num3 + ']').addClass('active_page3')
+				.siblings('.active_page3').removeClass('active_page3');
+
+		//update the current page input field
+		$('#current_page3').val(page_num3);
+	}
+
+	/* 	************************************* */
+
+	function previous2() {
+
+		new_page2 = parseInt($('#current_page2').val()) - 1;
+		//if there is an item before the current active link run the function
+		if ($('.active_page2').prev('.page_link2').length == true) {
+			go_to_page2(new_page2);
+		}
+
+	}
+
+	function next2() {
+		new_page2 = parseInt($('#current_page2').val()) + 1;
+		//if there is an item after the current active link run the function
+		if ($('.active_page2').next('.page_link2').length == true) {
+			go_to_page2(new_page2);
+		}
+
+	}
+	function go_to_page2(page_num2) {
+		//get the number of items shown per page
+		var show_per_page2 = parseInt($('#show_per_page2').val());
+
+		//get the element number where to start the slice from
+		start_from2 = page_num2 * show_per_page2;
+
+		//get the element number where to end the slice
+		end_on2 = start_from2 + show_per_page2;
+
+		//hide all children elements of content div, get specific items and show them
+		$('#content2').children().css('display', 'none').slice(start_from2,
+				end_on2).css('display', 'block');
+
+		/*get the page link that has longdesc attribute of the current page and add active_page class to it
+		and remove that class from previously active page link*/
+		$('.page_link2[longdesc2=' + page_num2 + ']').addClass('active_page2')
+				.siblings('.active_page2').removeClass('active_page2');
+
+		//update the current page input field
+		$('#current_page2').val(page_num2);
+	}
+
+	/* *********************** */
+
+	function previous1() {
+
+		new_page1 = parseInt($('#current_page1').val()) - 1;
+		//if there is an item before the current active link run the function
+		if ($('.active_page1').prev('.page_link1').length == true) {
+			go_to_page1(new_page1);
+		}
+
+	}
+
+	function next1() {
+		new_page1 = parseInt($('#current_page1').val()) + 1;
+		//if there is an item after the current active link run the function
+		if ($('.active_page1').next('.page_link1').length == true) {
+			go_to_page1(new_page1);
+		}
+
+	}
+	function go_to_page1(page_num1) {
+		//get the number of items shown per page
+		var show_per_page1 = parseInt($('#show_per_page1').val());
+
+		//get the element number where to start the slice from
+		start_from1 = page_num1 * show_per_page1;
+
+		//get the element number where to end the slice
+		end_on1 = start_from1 + show_per_page1;
+
+		//hide all children elements of content div, get specific items and show them
+		$('#content1').children().css('display', 'none').slice(start_from1,
+				end_on1).css('display', 'block');
+
+		/*get the page link that has longdesc attribute of the current page and add active_page class to it
+		and remove that class from previously active page link*/
+		$('.page_link1[longdesc1=' + page_num1 + ']').addClass('active_page1')
+				.siblings('.active_page1').removeClass('active_page1');
+
+		//update the current page input field
+		$('#current_page1').val(page_num1);
+	}
+</script>
+
+
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script>
+	var arr = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+			36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52,
+			53, 54, 55, 56, 57, 58, 59, 60, 62, 63, 64, 65, 66, 67, 68, 69, 70,
+			71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87,
+			88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 99, 98, 100 ];
+	$(document).ready(
+			function() {
+
+				$.each(arr, function(index, val) {
+					$(".show" + val).click(function() {
+						$(".show0" + val).slideToggle("slow");
+					});
+				});
+
+				$("#message").click(
+						function() {
+							$("#call").slideUp();
+							$("#notify").slideToggle("slow");
+							$(this).find('.notify').toggleClass(
+									'glyphicon-plus').toggleClass(
+									'glyphicon-minus');
+
+						});
+
+				$("#interview").click(
+						function() {
+							$("#notify").slideUp();
+							$("#call").slideToggle("slow");
+							$(this).find('.inter')
+									.toggleClass('glyphicon-plus').toggleClass(
+											'glyphicon-minus');
+
+						});
+
+				$("#aa1").mouseenter(function() {
+					$("#sociallist").toggleClass("remove");
+					$(".btnopenclose").toggleClass("as_selected");
+				});
+
+				$('.carousel').carousel({
+					interval : 1000
+				});
+			});
+</script>
+
+
+<link href="css2/slider.css" rel="stylesheet" type="text/css"
+	media="all" />
+
+<!-- shubham sharma work here  -->
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.publish_button').click(function(e) {
+			e.preventDefault();
+			  var parent_node = $(this).parent("div");
+	            var ajaxdata = parent_node.find('input[name="jobid"]').val();
+	            //alert(ajaxdata);
+			var value = 'ajaxdata1=' + ajaxdata;
+		    var button = $(this);
+		    
+		    var publish_parent = $(this).closest('div.panel_box');
+		    var publish_status = $(publish_parent).find(".publish_status");
+			$.ajax({
+				url : "PublishNewJob?joblistid",
+				type : "post",
+				data : value,
+				cache : true,
+				success : function(data) {
+					if(data.trim()=="1"){
+						$(button).html("PUBLISHED");
+						$(button).removeClass("btn-danger");
+						$(button).addClass("btn-success");
+						$(publish_status).html("UNPUBLISHED");
+						$(publish_status).css("background-color","#ff3333");
+					}
+					else
+					{
+						$(button).html("UNPUBLISHED");
+						$(button).removeClass("btn-success");
+						$(button).addClass("btn-danger");
+						$(publish_status).html("PUBLISHED");
+						$(publish_status).css("background-color","#29a329");
+					}
+					 
+				}
+			});
+		});
+		
+		
+		$('.delete_button').click(function(e) {
+			e.preventDefault();
+			if(confirm("You want to delete this job"))
+			{
+				deletejob(this);
+			}
+			else
+			{
+			
+		}
+			
+			
+		});
+	
+		
+	
+			function deletejob(button){
+				
+				
+			  var parent_node = $(button).parent("div");
+	            var ajaxdata = parent_node.find('input[name="jobid"]').val();
+	           
+	            var value = 'ajaxdata1=' + ajaxdata;
+	            var publish_parent = $(button).closest('div.panel_box');
+	            $.ajax({
+	            	url : "Delete_postedJob?joblistid",
+					type : "post",
+					data : value,
+					cache : true,
+					success : function(data) {
+						
+					          $(publish_parent).remove();
+					}
+	            	
+	            });
+			}
+	});
+		
+
+</script>
+<SCRIPT type="text/javascript">
+    window.history.forward();
+    function noBack() { window.history.forward(); }
+</SCRIPT>
+</head>
+
+
+
+<%
+	Connection conn = null;
+	try {
+		conn = new DConnection().getConnection();
+		System.out.println("Succefully connected on View Job Page");
+	} catch (Exception e) {
+	}
+%>
+
+<%-- <%
+if (session.getAttribute("jobid") == null) {
+	 
+	  request.setAttribute("Error", "Session has ended.  Please login.");
+	   RequestDispatcher rd = request.getRequestDispatcher("Recruiter_login.jsp");
+	   rd.forward(request, response);
+}
+%> --%>
+<%
+	if (session.getAttribute("jobid") != null) {
+		String jobid = null;
+		session.setAttribute("jobid", jobid);
+	}
+%>
+
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top"
+	style="background-image: url('images/webapp.jpg');"  onload="noBack();"
+    onpageshow="if (event.persisted) noBack();">
+	<!-- header -->
+	<div class="header-w3layouts" style="height: 80px;">
+		<!-- Navigation -->
+		<%@include file="common/header.jsp"%>
+	</div>
+	<!-- //header -->
+
+	<!-- 		change password -->
+
+	<!-- 		change password -->
+
+
+	<!-- 	start social media -->
+	<div id="socialarea">
+		<ul id="sociallist">
+			<li class="facebook_social"><a href="#" target="_new"><img
+					src="socialmediaimage/about.png" class="img-circle"
+					style="width: 30px; padding: 2px;"></a></li>
+			<li class="twitter_social"><a href="#" target="_new"><img
+					src="socialmediaimage/support.png" class="img-circle"
+					style="width: 30px; padding: 2px;"></a></li>
+			<li class="googleplus_social"><a href="#" target="_new"><img
+					src="socialmediaimage/blog.png" class="img-circle"
+					style="width: 30px; padding: 2px;"></a></li>
+			<li class="pinterest_social"><a href="#" target="_new"><img
+					src="socialmediaimage/youtube.png" class="img-circle"
+					style="width: 30px; padding: 2px;"></a></li>
+			<li class="linkedin_social" id="more"><a href="#"><img
+					src="socialmediaimage/social.png" class="img-circle"
+					style="width: 30px; padding: 2px;"></a>
+				<ul id="sociallist1" style="display: none;">
+					<li class="facebook_social"><a href="#" target="_new"><img
+							src="socialmediaimage/facebook.jpg" class="img-circle"
+							style="width: 30px; padding: 2px;"></a></li>
+					<li class="twitter_social"><a href="#" target="_new"><img
+							src="socialmediaimage/linkedin.png" class="img-circle"
+							style="width: 30px; padding: 2px;"></a></li>
+					<li class="googleplus_social"><a href="#" target="_new"><img
+							src="socialmediaimage/googlplus.jpg" class="img-circle"
+							style="width: 30px; padding: 2px;"></a></li>
+					<li class="pinterest_social"><a href="#" target="_new"><img
+							src="socialmediaimage/instrgram.png" class="img-circle"
+							style="width: 30px; padding: 2px;"></a></li>
+				</ul></li>
+		</ul>
+		<div class="btnopenclose">
+
+			<a id="aa1" class="arrow_social"><i class="fa fa-angle-left"></i></a>
+		</div>
+	</div>
+	<!--  end social media -->
+
+
+	<!-- 	start container -->
+
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+				<!--  start profile -->
+				<form>
+					<div class="profile">
+
+						<!-- start fill up data -->
+						<div id='content3'>
+
+							<%
+								// to create all varible which is related job list
+								int jobid = 0, jobcategoryid = 0, jobcountryid = 0, jobstateid = 0, jobcityid = 0, jobscore = 0, jobexp = 0;
+								String jobqualid = null, jobskillid = null;
+								String skillname1 = null;
+								String job_title = null, job_desc = null;
+								String country_name = null, state_name = null, city_name = null;
+								int qulid = 0;
+								int sid = 0;
+								String qulification = null;
+
+								int jobstatus1 = 0;
+
+								int cnt = 1;
+
+								// to fetch all id for related job list which is depend on requirter
+								String sql = "SELECT `job_id`,`job_qual_id_list`,`job_category_id`,`job_skills_id_list`,`job_country_id`,`job_state_id`,`job_city_id`,`job_status` FROM `job_list` WHERE `recruiter_id`=1";
+								PreparedStatement p = conn.prepareStatement(sql);
+								ResultSet rs = p.executeQuery();
+								int i = 0;
+								while (rs.next()) {
+									jobid = rs.getInt(1);
+									jobqualid = rs.getString(2);
+									qulid = Integer.parseInt(jobqualid);
+									jobcategoryid = rs.getInt(3);
+									jobskillid = rs.getString(4);
+									jobcountryid = rs.getInt(5);
+									jobstateid = rs.getInt(6);
+									jobcityid = rs.getInt(7);
+									jobstatus1 = rs.getInt(8);
+
+									// to fetch all joblist data depend on job id
+									String sql01 = "SELECT `job_id`,`job_title`,`job_apt_score`,`job_desc`,`job_exp` FROM `job_list` WHERE `job_id`="
+											+ jobid + "";
+									PreparedStatement p3 = conn.prepareStatement(sql01);
+									ResultSet rs3 = p3.executeQuery();
+									while (rs3.next()) {
+										job_title = rs3.getString(2);
+										jobscore = rs3.getInt(3);
+										job_desc = rs3.getString(4);
+										jobexp = rs3.getInt(5);
+
+									}
+
+									// to fetch country ,state & city data
+
+									// country
+									String sql02 = "SELECT `country_name` FROM `country_master` WHERE `id`=" + jobcountryid + "";
+									PreparedStatement p4 = conn.prepareStatement(sql02);
+									ResultSet rs4 = p4.executeQuery();
+									while (rs4.next()) {
+										country_name = rs4.getString(1);
+									}
+
+									// state
+									String sql03 = "SELECT `state_name` FROM `state_master` WHERE `state_id`=" + jobstateid + "";
+									PreparedStatement p5 = conn.prepareStatement(sql03);
+									ResultSet rs5 = p5.executeQuery();
+									while (rs5.next()) {
+										state_name = rs5.getString(1);
+									}
+
+									// city
+									String sql04 = "SELECT `city_name` FROM `city_master` WHERE `city_id`=" + jobcityid + "";
+									PreparedStatement p6 = conn.prepareStatement(sql04);
+									ResultSet rs6 = p6.executeQuery();
+									while (rs6.next()) {
+										city_name = rs6.getString(1);
+									}
+							%>
+
+							<div class="panel_box"> 
+<!-- add here class panel_box -->
+								<div class="panel pane-default  show<%=cnt%> ">
+									<div class="panel-body">
+									
+										<p class="h5">
+											<span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;<%=job_title%>&nbsp;&nbsp;
+											<%
+												if (jobstatus1 == 0) {
+											%>
+											<!-- add here publish_status -->
+											<span class="badge publish_status"
+											
+												style="font-size: 15px; background-color: #29a329; float: right; color: #fff;">PUBLISHED</span>
+											<%
+												} else {
+											%>
+
+											<span class="badge publish_status"
+												style="font-size: 15px; background-color: #ff3333; float: right; color: #fff;">UNPUBLISHED</span>
+											<%
+												}
+											%>
+										</p>
+										<p class="h5">
+											<span class="glyphicon glyphicon-certificate"></span>&nbsp;
+											<mark>
+												Apptitude Score :
+												<%=jobscore%></mark>
+										</p>
+										<p class="h5">
+											<span class="glyphicon glyphicon-map-marker"></span>&nbsp;<%=city_name%>&nbsp;,&nbsp;<%=state_name%>&nbsp;,&nbsp;<%=country_name%></p>
+									</div>
+								</div>
+								<%
+									// to find qulification
+										String sql05 = "SELECT `qual_name` FROM `qualification_master` WHERE `qual_id`=" + qulid + "";
+										PreparedStatement p7 = conn.prepareStatement(sql05);
+										ResultSet rs7 = p7.executeQuery();
+										while (rs7.next()) {
+											qulification = rs7.getString(1);
+										}
+								%>
+								<div class="panel pane-default show0<%=cnt%>"
+									style="margin-top: -22px; display: none;">
+									<div class="panel-body">
+										<p class="text-justify h5">
+											<strong class="h4">Description</strong><br> <br>
+											<%=job_desc%>
+										</p>
+										<p class="h5">
+											<i class="fa fa-archive" aria-hidden="true"></i>&nbsp;Experince
+											:
+											<%=jobexp%>
+											Year
+										</p>
+										<p class="h5">
+											<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp;Skills :
+											<%
+												// to split all skill id
+													//for (String skillid: jobskillid.split(",")) {
+													//sid=Integer.parseInt(skillid);
+													String skillid;
+													
+													// to fire sql for fetching data depend on skill id
+													String sql1 = "SELECT `job_skills_id_list` FROM `job_list` WHERE `job_id`=" + jobid + "";
+													PreparedStatement p2 = conn.prepareStatement(sql1);
+													ResultSet rs2 = p2.executeQuery();
+													while (rs2.next()) {
+														skillname1 = rs2.getString(1);
+											%>
+
+											<%=skillname1%>
+											<%
+												}
+													
+													// }
+											%>
+										</p>
+									
+										<p class="h5">
+											<span class="glyphicon glyphicon-education"></span>&nbsp;Qulification
+											:
+											<%=qulification%></p>
+										<br>
+
+										<%
+											int status = 0;
+												String sql11 = "SELECT `job_status` FROM `job_list` WHERE `job_id`=" + jobid + "";
+												PreparedStatement p01 = conn.prepareStatement(sql11);
+												ResultSet r = p01.executeQuery();
+												while (r.next()) {
+													status = r.getInt(1);
+												}
+										%>
+
+										<%
+											if (status == 1) {
+										%>
+										<input type="hidden" class="jobid" name="jobid"
+											value="<%=jobid%>" size="30" />
+										<button type="button"
+											class="btn btn-success input1 publish_button"
+											style="border: solid;">PUBLISHED</button>
+
+										<%
+											} else {
+										%>
+										<!-- shubham -->
+										<input type="hidden" class="jobid" name="jobid"
+											value="<%=jobid%>" size="30" />
+										<button type="button"
+											class="btn btn-danger input1 publish_button"
+											style="border: solid;">UNPUBLISHED</button>
+
+										<%
+											}
+										%>
+									<input type="hidden" class="jobid" name="jobid"
+											value="<%=jobid%>" size="30" />
+										<button type="button" class="btn btn-danger input1 delete_button"
+											style="border: solid;">DELETE</button>
+											
+											
+										 <button type="button" class="btn btn-danger input1"
+											style="border: solid;">
+											<a href="vewstudentinfo_job.jsp?joblistid=<%=jobid%>&jobskills=<%=skillname1 %> &check1=viewpostjob"style="color: #fff;">CANDIDATE</a>
+						
+										</button>
+										 
+										 <!-- here some modification  by shubham sharma -->
+										<%--  <input type="text" value="<%=skillname1 %>">
+										 <button type="button" class="btn btn-danger input1"
+											style="border: solid;">
+											<a href="vewstudentinfo_job.jsp?joblistid=<%=skillname1 %>&check1=viewpostjob"
+												style="color: #fff;">CANDIDATE</a>
+										</button> --%>
+
+									</div>
+								</div>
+
+							</div>
+							<%
+								cnt++;
+									// to fetch all data on particular id
+									/* System.out.println("Job id :"+
+
+											+"\tQualification id :"+jobqualid+"\tCategory id :"+jobcategoryid+"\tSkill id"+jobskillid+"\tCountry id :"+jobcountryid+"\tState id :"+jobstateid+"\tCity id :"+jobcityid); */
+								}
+							%>
+
+
+
+
+
+
+							<!-- end fill up data -->
+
+
+						</div>
+
+					</div>
+				</form>
+
+				<center>
+					<input type='hidden' id='current_page3' /> <input type='hidden'
+						id='show_per_page3' />
+					<div id='page_navigation3' style="margin: 10px;"></div>
+				</center>
+
+			</div>
+
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+				<!-- start right sidebar -->
+				<div class="rightsidebar">
+
+					<!--  start side bar -->
+					<div class="row">
+
+						<!--    start notification -->
+
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="row">
+								<div class="col-lg-11 col-md-11 col-sm-11">
+									<div class="notification" id="message"
+										style="margin-bottom: 5px;">
+										<span class="glyphicon glyphicon-plus notify"
+											style="margin-left: 25px;"></span>&nbsp;<font>Notification</font>
+									</div>
+
+
+									<div id="notify" style="display: none;">
+										<div id='content2'>
+											<div class="panel panel1">
+												<div class="panel-heading" style="padding: 2px 25px;">
+													<p class="panel-title">Java Devoloper</p>
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading" style="padding: 2px 25px;">
+													<p class="panel-title">Java Devoloper</p>
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading" style="padding: 2px 25px;">
+													<p class="panel-title">Java Devoloper</p>
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading" style="padding: 2px 25px;">
+													<p class="panel-title">Java Devoloper</p>
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading" style="padding: 2px 25px;">
+													<p class="panel-title">Java Devoloper</p>
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+										</div>
+
+										<center>
+											<input type='hidden' id='current_page2' /> <input
+												type='hidden' id='show_per_page2' />
+											<div id='page_navigation2' style="margin: 10px;"></div>
+										</center>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+
+						<!--  end notification -->
+
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="row">
+								<div class="col-lg-11 col-md-11 col-sm-11">
+									<div class="notification" id="interview"
+										style="margin-bottom: 5px;">
+										<span class="glyphicon glyphicon-plus inter"
+											style="margin-left: 25px;"></span>&nbsp;Interview call
+									</div>
+
+									<div id="call" style="display: none;">
+										<div id='content1'>
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading"
+													style="padding: 2px 25px; background-color: rgba(255, 255, 255, .15);">
+													<img src="images/trab.png"
+														style="width: 30px; height: 30px;" class="img-rounded">Amit
+													Yadav
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading"
+													style="padding: 2px 25px; background-color: rgba(255, 255, 255, .15);">
+													<img src="images/trab.png"
+														style="width: 30px; height: 30px;" class="img-rounded">Amit
+													Yadav
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading"
+													style="padding: 2px 25px; background-color: rgba(255, 255, 255, .15);">
+													<img src="images/trab.png"
+														style="width: 30px; height: 30px;" class="img-rounded">Amit
+													Yadav
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading"
+													style="padding: 2px 25px; background-color: rgba(255, 255, 255, .15);">
+													<img src="images/trab.png"
+														style="width: 30px; height: 30px;" class="img-rounded">Amit
+													Yadav
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading"
+													style="padding: 2px 25px; background-color: rgba(255, 255, 255, .15);">
+													<img src="images/trab.png"
+														style="width: 30px; height: 30px;" class="img-rounded">Amit
+													Yadav
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+
+										</div>
+
+										<center>
+											<input type='hidden' id='current_page1' /> <input
+												type='hidden' id='show_per_page1' />
+											<div id='page_navigation1' style="margin: 10px;"></div>
+										</center>
+									</div>
+
+
+
+								</div>
+
+							</div>
+						</div>
+
+
+
+						<!--  to display latest news -->
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="row">
+								<div class="col-lg-12 col-md-12 col-sm-12">
+									<div class="newsbox">
+										<p class="h4" style="margin-left: 10px;">Latest News</p>
+										<div id='content4'>
+
+											<div>
+												<div class="panel newstyle">
+													<img src="images/icon.png"
+														style="width: 50px; height: 50px; margin-left: 10px;"
+														class="img-responsive">
+													<p class="h4" style="margin-left: 10px;">Web developer</p>
+													<p class="h5" style="margin-left: 10px;">
+														Designscape &nbsp;<br>Mumbai, IN<a href="#"
+															style="float: right; margin-right: 3px; color: #ff1a1a;">Read
+															More</a>
+													</p>
+													<p class="h6" style="margin-left: 10px;">3 weeks ago</p>
+												</div>
+											</div>
+
+											<div>
+												<div class="panel newstyle">
+													<img src="images/back1.png"
+														style="width: 50px; height: 50px; margin-left: 10px;"
+														class="img-responsive">
+													<p class="h4" style="margin-left: 10px;">Android
+														developer</p>
+													<p class="h5" style="margin-left: 10px;">
+														Designscape &nbsp;<br>Navi Mumbai, IN<a href="#"
+															style="float: right; margin-right: 3px; color: #ff1a1a;">Read
+															More</a>
+													</p>
+													<p class="h6" style="margin-left: 10px;">1 day ago</p>
+												</div>
+											</div>
+
+											<div>
+												<div class="panel newstyle">
+													<img src="images/icon.png"
+														style="width: 50px; height: 50px; margin-left: 10px;"
+														class="img-responsive">
+													<p class="h4" style="margin-left: 10px;">iOS developer</p>
+													<p class="h5" style="margin-left: 10px;">
+														Designscape &nbsp;<br>Thane, IN<a href="#"
+															style="float: right; margin-right: 3px; color: #ff1a1a;">Read
+															More</a>
+													</p>
+													<p class="h6" style="margin-left: 10px;">4 weeks ago</p>
+												</div>
+											</div>
+
+										</div>
+
+										<center>
+											<input type='hidden' id='current_page4' /> <input
+												type='hidden' id='show_per_page4' />
+											<div id='page_navigation4' style="margin: 10px;"></div>
+										</center>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- start side bar -->
+
+
+				</div>
+				<!--  end right sidebar -->
+
+			</div>
+
+
+		</div>
+
+	</div>
+
+	<!--  end container -->
+
+
+	<!-- PopUp-Box-JavaScript -->
+	<script src="js/jquery.chocolat.js"></script>
+	<script type="text/javascript">
+			$(function() {
+				$('.filtr-item a').Chocolat();
+			});
+		</script>
+	<!-- //PopUp-Box-JavaScript -->
+	<!-- fliter-JavaScript -->
+	<script src="js/jquery.filterizr.js"></script>
+	<script src="js/controls.js"></script>
+	<script type="text/javascript">
+			$(function() {
+				$('.filtr-container').filterizr();
+			});
+		</script>
+	<!-- //fliter-JavaScript -->
+	<script src="js/jarallax.js"></script>
+	<script src="js/SmoothScroll.min.js"></script>
+	<script type="text/javascript">
+	/* init Jarallax */
+	$('.jarallax').jarallax({
+		speed: 0.5,
+		imgWidth: 1366,
+		imgHeight: 768
+	})
+</script>
+	<!-- start-smoth-scrolling -->
+	<script type="text/javascript" src="js/easing.js"></script>
+	<!-- //here ends scrolling icon -->
+
+
+</body>
+</html>
+
+<!-- this page update by mitali date10/10/17 -->

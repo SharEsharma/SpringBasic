@@ -1,0 +1,751 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="dbcalls.*,java.util.*" %>
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Trabaajo</title>
+<link rel="icon" href="images/trab.png" />
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="bootsrap_css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="css/chocolat.css" type="text/css" media="screen"><!-- chocolate css for gallery light box-->
+<!-- animation -->
+<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
+<!-- //animation --> 
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+<link href="common_style/common_style.css" rel="stylesheet" type="text/css" media="all" />
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+<!-- onlinefonts -->
+<link href="//fonts.googleapis.com/css?family=Dancing+Script:400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700" rel="stylesheet">
+<!-- //onlinefonts -->
+  <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+  
+   <!-- start bootsrap -->
+        <!--  end bootsrap -->
+   
+   
+    <!-- start menu bar -->
+<link href="common_style/navbar.css" rel="stylesheet" type="text/css" media="all" />
+
+     <!--  end menu bar -->
+
+     <!--  start main content -->
+  <link href="common_style/style.css" rel="stylesheet" type="text/css" media="all" />
+     <!-- end main content -->
+
+
+   <!-- start social media -->          
+<link rel="stylesheet" href="css/socialmedia.css">
+<script type="text/javascript" src="js/socialmedia.js"></script>
+    <!--    end social media -->
+    
+    
+     <!-- start popup dialog box -->
+     <link rel="stylesheet" href="css/popupDialog.css">
+         <!--   end popup dialog box -->
+<!-- This script add by shubham sharma for back button disble -->
+<script >
+ header( "Pragma: no-cache" );
+   header( "Cache-Control: no-cache" );
+   header(  "Expires: 0" );
+   
+   </script>
+
+
+<script>
+function putvalue()
+{
+	var changevalue=document.forms['companyinfo']['c1'].value;
+	if(changevalue=="sameaddress")
+		{
+		var changevalue=document.forms['companyinfo']['headofficeaddress'].value;
+		document.getElementById("currentaddress").innerHTML=changevalue;
+		}
+}
+
+</script>
+<style type="text/css">
+				#page_navigation2 a
+				{
+					padding:3px;
+					border:1px solid gray;
+					margin:2px;
+					color:black;
+					text-decoration:none
+				}
+				.active_page2
+				{
+					background:#ed1c24;
+					color:white !important;
+				}
+			</style>
+			
+			<style type="text/css">
+				#page_navigation1 a
+				{
+					padding:3px;
+					border:1px solid gray;
+					margin:2px;
+					color:black;
+					text-decoration:none
+				}
+				.active_page1
+				{
+					background:#ed1c24;
+					color:white !important;
+				}
+			</style>
+<script type="text/javascript">
+				$(document).ready(function(){
+					
+					//how much items per page to show
+					var show_per_page2 =4; 
+					//getting the amount of elements inside content div
+					var number_of_items2 = $('#content2').children().size();
+					//calculate the number of pages we are going to have
+					var number_of_pages2 = Math.ceil(number_of_items2/show_per_page2);
+					
+					//set the value of our hidden input fields
+					$('#current_page2').val(0);
+					$('#show_per_page2').val(show_per_page2);
+					
+					//now when we got all we need for the navigation let's make it '
+					
+					/* 
+					what are we going to have in the navigation?
+						- link to previous page
+						- links to specific pages
+						- link to next page
+					*/
+					var navigation_html2 = '<a class="previous_link2" href="javascript:previous2();">Prev</a>';
+					var current_link2 = 0;
+					while(number_of_pages2 > current_link2){
+						navigation_html2 += '<a class="page_link2" href="javascript:go_to_page2(' + current_link2 +')" longdesc2="' + current_link2 +'">'+ (current_link2 + 1) +'</a>';
+						current_link2++;
+					}
+					navigation_html2 += '<a class="next_link2" href="javascript:next2();">Next</a>';
+					
+					$('#page_navigation2').html(navigation_html2);
+					
+					//add active_page class to the first page link
+					$('#page_navigation2 .page_link2:first').addClass('active_page2');
+					
+					//hide all the elements inside content div
+					$('#content2').children().css('display', 'none');
+					
+					//and show the first n (show_per_page) elements
+					$('#content2').children().slice(0, show_per_page2).css('display', 'block');
+					
+				
+				
+					var show_per_page1 =4; 
+					//getting the amount of elements inside content div
+					var number_of_items1 = $('#content1').children().size();
+					//calculate the number of pages we are going to have
+					var number_of_pages1 = Math.ceil(number_of_items1/show_per_page1);
+					
+					//set the value of our hidden input fields
+					$('#current_page1').val(0);
+					$('#show_per_page1').val(show_per_page1);
+					
+					//now when we got all we need for the navigation let's make it '
+					
+					/* 
+					what are we going to have in the navigation?
+						- link to previous page
+						- links to specific pages
+						- link to next page
+					*/
+					var navigation_html1 = '<a class="previous_link1" href="javascript:previous1();">Prev</a>';
+					var current_link1 = 0;
+					while(number_of_pages1 > current_link1){
+						navigation_html1 += '<a class="page_link1" href="javascript:go_to_page1(' + current_link1 +')" longdesc1="' + current_link1 +'">'+ (current_link1 + 1) +'</a>';
+						current_link1++;
+					}
+					navigation_html1 += '<a class="next_link1" href="javascript:next1();">Next</a>';
+					
+					$('#page_navigation1').html(navigation_html1);
+					
+					//add active_page class to the first page link
+					$('#page_navigation1 .page_link1:first').addClass('active_page1');
+					
+					//hide all the elements inside content div
+					$('#content1').children().css('display', 'none');
+					
+					//and show the first n (show_per_page) elements
+					$('#content1').children().slice(0, show_per_page1).css('display', 'block');
+					
+			
+				});
+				
+				function previous2(){
+					
+					new_page2 = parseInt($('#current_page2').val()) - 1;
+					//if there is an item before the current active link run the function
+					if($('.active_page2').prev('.page_link2').length==true){
+						go_to_page2(new_page2);
+					}
+					
+				}
+				
+				function next2(){
+					new_page2 = parseInt($('#current_page2').val()) + 1;
+					//if there is an item after the current active link run the function
+					if($('.active_page2').next('.page_link2').length==true){
+						go_to_page2(new_page2);
+					}
+					
+				}
+				function go_to_page2(page_num2){
+					//get the number of items shown per page
+					var show_per_page2 = parseInt($('#show_per_page2').val());
+					
+					//get the element number where to start the slice from
+					start_from2 = page_num2 * show_per_page2;
+					
+					//get the element number where to end the slice
+					end_on2 = start_from2 + show_per_page2;
+					
+					//hide all children elements of content div, get specific items and show them
+					$('#content2').children().css('display', 'none').slice(start_from2, end_on2).css('display', 'block');
+					
+					/*get the page link that has longdesc attribute of the current page and add active_page class to it
+					and remove that class from previously active page link*/
+					$('.page_link2[longdesc2=' + page_num2 +']').addClass('active_page2').siblings('.active_page2').removeClass('active_page2');
+					
+					//update the current page input field
+					$('#current_page2').val(page_num2);
+				}
+				
+				
+				
+				/* *********************** */
+				
+				function previous1(){
+					
+					new_page1 = parseInt($('#current_page1').val()) - 1;
+					//if there is an item before the current active link run the function
+					if($('.active_page1').prev('.page_link1').length==true){
+						go_to_page1(new_page1);
+					}
+					
+				}
+				
+				function next1(){
+					new_page1 = parseInt($('#current_page1').val()) + 1;
+					//if there is an item after the current active link run the function
+					if($('.active_page1').next('.page_link1').length==true){
+						go_to_page1(new_page1);
+					}
+					
+				}
+				function go_to_page1(page_num1){
+					//get the number of items shown per page
+					var show_per_page1 = parseInt($('#show_per_page1').val());
+					
+					//get the element number where to start the slice from
+					start_from1 = page_num1 * show_per_page1;
+					
+					//get the element number where to end the slice
+					end_on1 = start_from1 + show_per_page1;
+					
+					//hide all children elements of content div, get specific items and show them
+					$('#content1').children().css('display', 'none').slice(start_from1, end_on1).css('display', 'block');
+					
+					/*get the page link that has longdesc attribute of the current page and add active_page class to it
+					and remove that class from previously active page link*/
+					$('.page_link1[longdesc1=' + page_num1 +']').addClass('active_page1').siblings('.active_page1').removeClass('active_page1');
+					
+					//update the current page input field
+					$('#current_page1').val(page_num1);
+				}
+  
+			</script>
+			
+			  <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+			<script>
+			$(document).ready(function(){
+			    $("#message").click(function(){
+			    	 $("#call").slideUp();
+			        $("#notify").slideToggle("slow");
+			    });
+			    
+			    $("#profileview").click(function(){
+			    	$("#profileinfo1").slideUp();
+			    	
+			        $("#profileview1").slideToggle("slow");
+			    });
+			    
+			    $("#profileinfo").click(function(){
+			    	 $("#profileview1").slideUp();
+			    	
+
+			        $("#profileinfo1").slideToggle("slow");
+			    });
+			    
+			    
+			    $("#interview").click(function(){
+			    	 $("#notify").slideUp();
+			        $("#call").slideToggle("slow");
+			    });
+			    
+			    $("#aa1").mouseenter(function() {
+	    	        $("#sociallist").toggleClass("remove");
+	    	        $(".btnopenclose").toggleClass("as_selected");
+	    	      });
+	    	    
+	    	    $('.carousel').carousel({
+	    	        interval: 1000
+	    	      });
+	    	    
+	    	   
+			});
+
+			</script>
+		<!-- this code write by shubham sharma for back button disable -->
+		<SCRIPT type="text/javascript">
+    window.history.forward();
+    function noBack() { window.history.forward(); }
+</SCRIPT>
+			
+			
+<link href="css2/slider.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+<body id="page-top" data-spy="scroll"  data-target=".navbar-fixed-top" onload="noBack();"
+    onpageshow="if (event.persisted) noBack();">
+> 
+		<!-- header -->
+		<div class="header-w3layouts" style="height:80px;"> 
+			<!-- Navigation -->
+			<%@include file="common/header.jsp" %> 
+		</div>	
+		<!-- //header -->
+
+<!-- 		change password -->
+
+<!-- 		change password -->
+
+
+	<!-- 	start social media -->
+	<div id="socialarea">
+  <ul id="sociallist">
+    <li class="facebook_social"> <a href="#" target="_new"><img src="socialmediaimage/about.png" class="img-circle" style="width:30px; padding:2px;"></a> </li>
+    <li class="twitter_social"> <a href="#" target="_new"><img src="socialmediaimage/support.png" class="img-circle" style="width:30px; padding:2px;"></a> </li>
+    <li class="googleplus_social"> <a href="#" target="_new"><img src="socialmediaimage/blog.png" class="img-circle" style="width:30px; padding:2px;"></a> </li>
+     <li class="pinterest_social"> <a href="#" target="_new"><img src="socialmediaimage/youtube.png" class="img-circle" style="width:30px; padding:2px;"></a> </li>
+    <li class="linkedin_social" id="more"> <a href="#"><img src="socialmediaimage/social.png" class="img-circle" style="width:30px; padding:2px;"></a> 
+  <ul id="sociallist1" style="display:none;">
+    <li class="facebook_social"> <a href="#" target="_new"><img src="socialmediaimage/facebook.jpg" class="img-circle" style="width:30px; padding:2px;"></a> </li>
+    <li class="twitter_social"> <a href="#" target="_new"><img src="socialmediaimage/linkedin.png" class="img-circle" style="width:30px; padding:2px;"></a> </li>
+    <li class="googleplus_social"> <a href="#" target="_new"><img src="socialmediaimage/googlplus.jpg" class="img-circle" style="width:30px; padding:2px;"></a> </li>
+     <li class="pinterest_social"> <a href="#" target="_new"><img src="socialmediaimage/instrgram.png" class="img-circle" style="width:30px; padding:2px;"></a> </li>
+     </ul>
+   </li>
+    </ul>
+  <div class="btnopenclose">
+    <a id="aa1" class="arrow_social"><i class="fa fa-angle-left"></i></a>
+  </div>
+</div>
+	     <!--  end social media -->
+
+	     <%
+	     	/*	HARSHAD KAMBLE's CODE	     	
+	     	*/
+
+	     	int recruiter_id = Integer.parseInt( (session.getAttribute("recruiterID")).toString() );
+	     
+	     	System.out.println("Recruiter ID in JSP is ::::::: " + recruiter_id );
+	     
+	    	List<HashMap<String,String>> list = FetchLists.getViewCompanyProfileData( recruiter_id );
+	
+/*	    	
+	    	System.out.println("\n\nHashMap Records : " + list );
+	    	int test = 10/0;
+*/
+	    	
+	     	/*
+	     		TERMS:-
+
+	     		list.get(0) --> recruiter data
+	     		list.get(1) --> company data
+
+	     	*/
+	     %>
+	
+	
+<!-- 	start container -->
+
+<div class="container">
+	
+<div class="row">
+
+<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+ <!--  start profile -->
+ <div class="profile">
+ <div class="panel">
+ <div class="panel-body">
+  <center><img src="images/img.jpg" class="img-circle img12">
+  </center>
+  <div class="row"> 
+  <!--  company profile -->
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="panel panel-default" style="margin-top:5px;">
+  <div class="panel-heading">
+  <p class="panel-title h2" style="color:#e32c24;" id="profileview"><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Company Information</p>
+  </div>
+  <div class="panel-body" id="profileview1">
+  <table class="table">
+  <thead>
+  <tr>
+  <td>Company Name</td>
+  <td><%=list.get(1).get("companyName") %></td>
+  <!-- <td>Xenture</td> -->
+  
+  </tr>
+   <tr>
+  <td>Company Url</td>
+  <td><%=list.get(1).get("companyURL") %></td>
+  <!-- <td>www.xenture.co</td> -->
+  </tr>
+   <tr>
+  <td>Company Country</td>
+  <td><%=list.get(1).get("countryName") %></td>
+  <!-- <td>India</td> -->
+  </tr>
+   <tr>
+  <td>Company Branch</td>
+  <td><%=list.get(1).get("cityName") %></td>
+  <!-- <td>Navi Mumbai</td> -->
+  </tr>
+   <tr>
+  <td>Company Address</td>
+  <td><%=list.get(1).get("branchAddress") %></td>
+  <!-- <td>The Ambience Court, 1306 13th Floor, opp. Vashi RTO 
+       Navi Mumbai- 400703 Phone : 022- 27841201 & 022- 27831201</td> -->
+  </tr>
+  <thead>
+  </table>
+  </div>
+  </div>
+  </div>
+  
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="panel panel-default" style="margin-top:-12px;">
+  <div class="panel-heading">
+  <p class="panel-title h2" style="color:#e32c24;" id="profileinfo"><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Hr Information</p>
+  </div>
+  <div class="panel-body" id="profileinfo1" style="display:none;">
+  <table class="table">
+  <thead>
+  <tr>
+  <td>Firstname</td>
+  <td><%=list.get(0).get("firstName") %></td>
+  <!-- <td>Amit</td> -->
+  </tr>
+   <tr>
+  <td>Lastname</td>
+  <td><%=list.get(0).get("lastName") %></td>
+  <!-- <td>Yadav</td> -->
+  </tr>
+   <tr>
+  <td>Email</td>
+  <td><%=list.get(0).get("email") %></td>
+  <!-- <td>a.yadav@xenture.co</td> -->
+  </tr>
+   <tr>
+  <td>Gender</td>
+  <td><%=list.get(0).get("gender") %></td>
+  <!-- <td>Male</td> -->
+  </tr>
+   <tr>
+  <td>Decription</td>
+  <td><%=list.get(0).get("description") %></td>
+  <!-- <td>Web-Front developer</td> -->
+  </tr>
+  <thead>
+  </table>
+  </div>
+  </div>
+  </div>
+ <!--  company profile -->
+  </div>
+  </div>
+  </div>
+    <!--  start profile -->
+</div>
+</div>
+
+<div class="col-md-4 col-sm-4 col-xs-12">
+
+ <!-- start right sidebar -->
+ <div class="rightsidebar">
+
+ <!--  start side bar -->
+ <div class="row">
+ 
+<!--    start notification -->
+ 
+ <div class="col-lg-12 col-md-12 col-sm-12">
+ <div class="row">
+ <div class="col-lg-2 col-md-2 col-sm-2">
+ <img src="images/contact.png" class="img-circle" style="margin-left:20px; margin-top:12px; margin-bottom:5px; width:34px; height:34px;">
+ </div>
+ <div class="col-lg-10 col-md-10 col-sm-10">
+ <div class="notification" id="message" style="margin-bottom:5px;">
+ Notification
+ </div>
+ 
+ 
+ <div id="notify" style="display:none;">
+  <div id='content2'>
+  <div class="panel panel1">
+	    <div class="panel-heading" style="padding: 2px 25px;">
+	    <p class="panel-title">Java Devoloper</p>
+	    </div>
+	    <div class="panel-footer" style="height:35px;">
+	    29-06-2017 11-20-40 AM
+	    </div>
+	    </div>
+	    
+	    <div class="panel" style="margin-left:18px; width:250px;">
+	    <div class="panel-heading" style="padding: 2px 25px;">
+	    <p class="panel-title">Java Devoloper</p>
+	    </div>
+	    <div class="panel-footer" style="height:35px;">
+	    29-06-2017 11-20-40 AM
+	    </div>
+	    </div>
+	    
+	    <div class="panel" style="margin-left:18px; width:250px;">
+	    <div class="panel-heading" style="padding: 2px 25px;">
+	    <p class="panel-title">Java Devoloper</p>
+	    </div>
+	    <div class="panel-footer" style="height:35px;">
+	    29-06-2017 11-20-40 AM
+	    </div>
+	    </div>
+	    
+	    <div class="panel" style="margin-left:18px; width:250px;">
+	    <div class="panel-heading" style="padding: 2px 25px;">
+	    <p class="panel-title">Java Devoloper</p>
+	    </div>
+	    <div class="panel-footer" style="height:35px;">
+	    29-06-2017 11-20-40 AM
+	    </div>
+	    </div>
+	    
+	    <div class="panel" style="margin-left:18px; width:250px;">
+	    <div class="panel-heading" style="padding: 2px 25px;">
+	    <p class="panel-title">Java Devoloper</p>
+	    </div>
+	    <div class="panel-footer" style="height:35px;">
+	    29-06-2017 11-20-40 AM
+	    </div>
+	    </div>
+  </div>
+  
+  	<center><input type='hidden' id='current_page2' />
+	<input type='hidden' id='show_per_page2' />
+    <div id='page_navigation2' style="margin: 10px;"></div>
+    </center>
+  </div>
+  
+ </div>
+ 
+ </div>
+ </div>
+ 
+  <!--  end notification -->
+ 
+ <div class="col-lg-12 col-md-12 col-sm-12">
+ <div class="row">
+ <div class="col-lg-2 col-md-2 col-sm-2">
+ <img src="images/call.png" class="img-circle" style="margin-left:20px; margin-top:12px; margin-bottom:5px; width:34px; height:34px;">
+ </div>
+ <div class="col-lg-10 col-md-10 col-sm-10">
+ <div class="notification" id="interview" style="margin-bottom:5px; border-top-left-radius: 1.5em; border-bottom-right-radius: 1.5em;">
+ Interview call
+ </div>
+ 
+ <div id="call" style="display:none;">
+  <div id='content1'>
+        <div class="panel" style="margin-left:18px; width:250px;">
+	    <div class="panel-heading" style="padding: 2px 25px; background-color:rgba(255,255,255,.15);">
+        <img src="images/trab.png" style="width:30px; height:30px;" class="img-rounded">Amit Yadav
+	    </div>
+	    <div class="panel-footer" style="height:35px;">
+	    29-06-2017 11-20-40 AM
+	    </div>
+	    </div>
+	    
+	    <div class="panel" style="margin-left:18px; width:250px;">
+	    <div class="panel-heading" style="padding: 2px 25px; background-color:rgba(255,255,255,.15);">
+        <img src="images/trab.png" style="width:30px; height:30px;" class="img-rounded">Amit Yadav
+	    </div>
+	    <div class="panel-footer" style="height:35px;">
+	    29-06-2017 11-20-40 AM
+	    </div>
+	    </div>
+	    
+	     <div class="panel" style="margin-left:18px; width:250px;">
+	    <div class="panel-heading" style="padding: 2px 25px; background-color:rgba(255,255,255,.15);">
+        <img src="images/trab.png" style="width:30px; height:30px;" class="img-rounded">Amit Yadav
+	    </div>
+	    <div class="panel-footer" style="height:35px;">
+	    29-06-2017 11-20-40 AM
+	    </div>
+	    </div>
+	    
+	     <div class="panel" style="margin-left:18px; width:250px;">
+	    <div class="panel-heading" style="padding: 2px 25px; background-color:rgba(255,255,255,.15);">
+        <img src="images/trab.png" style="width:30px; height:30px;" class="img-rounded">Amit Yadav
+	    </div>
+	    <div class="panel-footer" style="height:35px;">
+	    29-06-2017 11-20-40 AM
+	    </div>
+	    </div>
+	    
+	     <div class="panel" style="margin-left:18px; width:250px;">
+	    <div class="panel-heading" style="padding: 2px 25px; background-color:rgba(255,255,255,.15);">
+        <img src="images/trab.png" style="width:30px; height:30px;" class="img-rounded">Amit Yadav
+	    </div>
+	    <div class="panel-footer" style="height:35px;">
+	    29-06-2017 11-20-40 AM
+	    </div>
+	    </div>
+	    
+	 
+  </div>
+  
+  	<center><input type='hidden' id='current_page1' />
+	<input type='hidden' id='show_per_page1' />
+    <div id='page_navigation1' style="margin: 10px;"></div>
+    </center>
+  </div>
+  
+  
+  
+ </div>
+ 
+ </div>
+ </div>
+ 
+ 
+ <div class="col-lg-12 col-md-12 col-sm-12">
+   <!-- start promos news -->
+   <br><br>
+   <p class="h4" style="margin-left:30px;"><b>Promo News</b></p>
+<div class="promosnews" style="width:300px; margin-left:15px;">
+  
+    <div class="carousel slide" id="myCarousel">
+        <div class="carousel-inner">
+            <div class="item active">
+                    <ul class="thumbnails" style="background-color:#ffebe6;">
+                        <li class="col-lg-4 col-md-4 col-sm-4">
+    						<div class="panel input1" style="width:250px;">
+    						<div class="panel-body">
+    						<a href="#">Samsung to launch refurbished Note 7 smartphones in South Korea this month
+    						</a>
+    						<p style="color:#ff1a1a;">Date : 12-07-2017 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5:10PM</p>
+    						</div>
+    						</div>
+    				   </li>
+                      
+               
+                    </ul>
+              </div><!-- /Slide1 --> 
+            <div class="item">
+                  <ul class="thumbnails">
+                        <li class="col-lg-4 col-md-4 col-sm-4">
+    						<div class="panel input1" style="width:250px;">
+    						<div class="panel-body">
+    						<a href="#">Samsung to launch refurbished Note 7 smartphones in South Korea this month</a>
+    						<p style="color:#ff1a1a;">Date : 12-07-2017 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5:10PM</p>
+    						</div>
+    						</div>
+    	              </li>
+                    </ul>
+              </div><!-- /Slide2 --> 
+          
+        </div>
+     	<center><ul style="width:43px; background-color:#fff;">
+				<li><a data-slide="prev" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+				<li><a data-slide="next" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-right"></i></li>
+			</ul>
+        </center>
+   </div> 
+
+</div>
+         
+ </div>
+ 
+ </div>
+      <!-- start side bar -->
+
+
+ </div>
+  <!--  end right sidebar -->
+
+</div>
+
+</div>
+
+</div>
+
+ <!--  end container -->
+
+
+<!-- PopUp-Box-JavaScript -->
+		<script src="js/jquery.chocolat.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('.filtr-item a').Chocolat();
+			});
+		</script>
+	<!-- //PopUp-Box-JavaScript -->	
+	<!-- fliter-JavaScript -->
+		<script src="js/jquery.filterizr.js"></script>
+		<script src="js/controls.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('.filtr-container').filterizr();
+			});
+		</script>
+	<!-- //fliter-JavaScript -->
+<script src="js/jarallax.js"></script>
+<script src="js/SmoothScroll.min.js"></script>
+<script type="text/javascript">
+	/* init Jarallax */
+	$('.jarallax').jarallax({
+		speed: 0.5,
+		imgWidth: 1366,
+		imgHeight: 768
+	})
+</script>
+<!-- start-smoth-scrolling -->
+	<script type="text/javascript" src="js/easing.js"></script>
+<!-- //here ends scrolling icon -->
+	
+
+</body>
+</html>
+<!-- This page update by mitali date 10/10/2017 -->

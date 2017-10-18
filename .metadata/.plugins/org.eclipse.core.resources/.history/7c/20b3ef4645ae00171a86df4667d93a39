@@ -1,0 +1,29 @@
+<!-- This page create by shubham sharma -->
+ 
+ <%
+response.setHeader("Pragma","no-cache"); // HTTP 1.0
+response.setHeader("Cache-Control","no-store"); // HTTP 1.1
+response.setDateHeader("Expires", 0);
+%>
+ <!-- this code for avoid back button -->
+ 
+ <SCRIPT type="text/javascript">
+    window.history.forward();
+    function noBack() { window.history.forward(); }
+</SCRIPT>
+</HEAD>
+<BODY onload="noBack();"
+    onpageshow="if (event.persisted) noBack();">
+ 
+<%request.getSession(false).invalidate();%> 
+
+<!-- on logout click invalidate all session -->
+<%
+ request.getRequestDispatcher("Recruiter_login.jsp").include(request, response);  
+          
+              
+       out.print("You are successfully logged out!");  
+             %>
+            
+             
+          

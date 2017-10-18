@@ -1,0 +1,34 @@
+<!-- This page create by shubham sharma -->
+ 
+ <%
+
+response.setHeader("Cache-Control","no-cache");
+response.setHeader("Cache-Control","no-store");
+response.setHeader("Pragma","no-cache");
+response.setDateHeader ("Expires", 0);
+    if(session.getAttribute("token")==null){
+    response.sendRedirect(request.getContextPath() + "Recruiter_login.jsp");
+
+}
+%>
+ 
+ 
+ 
+<%-- <%
+response.setHeader("Pragma","no-cache"); // HTTP 1.0
+response.setHeader("Cache-Control","no-store"); // HTTP 1.1
+response.setDateHeader("Expires", 0);
+%>
+ <!-- this code for avoid back button -->
+<%request.getSession(false).invalidate();%> 
+
+<!-- on logout click invalidate all session -->
+<%
+ request.getRequestDispatcher("Recruiter_login.jsp").include(request, response);  
+          
+              
+       out.print("You are successfully logged out!");  
+             %>
+               --%>
+             
+          

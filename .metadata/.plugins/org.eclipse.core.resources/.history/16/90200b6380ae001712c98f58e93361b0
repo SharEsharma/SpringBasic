@@ -1,0 +1,47 @@
+package com.xentuer.classes;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+public class StringSplit {
+	
+	static String s="_java,_css,_php";
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		
+		 int candidateid1 = 0;
+		 String firstname = null;
+		System.out.println("Before the string split:="+s);
+		
+		String s1[] =s.split(",");
+		System.out.println("First split:"+s1[0]);
+		System.out.println("Second split:"+s1[1]);
+		
+		for(int i=0;i<s1.length;i++){
+		
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/trabaajodb","root","");
+			String sql1 = "SELECT `candidate_id`,`candidate_first_name` FROM `candidate` WHERE  `candidate_skills_list` LIKE '%"+s1[0]+"%'";
+					 
+			PreparedStatement p1 = conn.prepareStatement(sql1);
+			ResultSet rs1 = p1.executeQuery();
+		
+			while (rs1.next()) {
+				candidateid1 =rs1.getInt(1);
+				firstname = rs1.getString(2);
+				System.out.println(candidateid1+"  "+ firstname+ " "+s1[i]);
+				
+			}
+			 
+			}
+		
+		}
+	
+	}
+	

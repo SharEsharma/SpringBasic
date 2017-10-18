@@ -1,0 +1,5 @@
+package com.xenture.controller;
+
+public class RegistrationController {
+
+}

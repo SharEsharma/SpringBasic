@@ -1,0 +1,1074 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@include file="common/DConnection.jsp"%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Trabaajo</title>
+<link rel="icon" href="images/trab.png" />
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript">
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
+<!-- //for-mobile-apps -->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link href="bootsrap_css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" media="all" />
+<link href="css/font-awesome.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link rel="stylesheet" href="css/chocolat.css" type="text/css"
+	media="screen">
+<!-- chocolate css for gallery light box-->
+<!-- animation -->
+<link href="css/animate.css" rel="stylesheet" type="text/css"
+	media="all">
+<!-- //animation -->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+<link href="common_style/common_style.css" rel="stylesheet"
+	type="text/css" media="all" />
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+//checkAccess session start
+<%
+Object value = session.getAttribute("recruiterID");
+		if(value==null){
+			session.setAttribute("recruiterLoginMessage",null);
+			   response.sendRedirect("Recruiter_login.jsp");
+		} 
+%>
+//checkAccess session end
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event) {
+			event.preventDefault();
+			$('html,body').animate({
+				scrollTop : $(this.hash).offset().top
+			}, 1000);
+		});
+	});
+</script>
+<!-- onlinefonts -->
+<link href="//fonts.googleapis.com/css?family=Dancing+Script:400,700"
+	rel="stylesheet">
+<link
+	href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700"
+	rel="stylesheet">
+<!-- //onlinefonts -->
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+
+<!-- start bootsrap -->
+<!--  end bootsrap -->
+
+
+<!-- start menu bar -->
+<link href="common_style/navbar.css" rel="stylesheet" type="text/css"
+	media="all" />
+
+<!--  end menu bar -->
+
+<!--  start main content -->
+<link href="common_style/style.css" rel="stylesheet" type="text/css"
+	media="all" />
+<!-- end main content -->
+
+
+<!-- start social media -->
+<link rel="stylesheet" href="css/socialmedia.css">
+<script type="text/javascript" src="js/socialmedia.js"></script>
+<!--    end social media -->
+
+
+<!-- start popup dialog box -->
+<link rel="stylesheet" href="css/popupDialog.css">
+<!--   end popup dialog box -->
+
+
+<script>
+	function putvalue() {
+		var changevalue = document.forms['companyinfo']['c1'].value;
+		if (changevalue == "sameaddress") {
+			var changevalue = document.forms['companyinfo']['headofficeaddress'].value;
+			document.getElementById("currentaddress").innerHTML = changevalue;
+		}
+	}
+</script>
+<style type="text/css">
+#page_navigation2 a {
+	padding: 3px;
+	border: 1px solid gray;
+	margin: 2px;
+	color: black;
+	text-decoration: none
+}
+
+.active_page2 {
+	background: #ed1c24;
+	color: white !important;
+}
+</style>
+
+<style type="text/css">
+#page_navigation1 a {
+	padding: 3px;
+	border: 1px solid gray;
+	margin: 2px;
+	color: black;
+	text-decoration: none
+}
+
+.active_page1 {
+	background: #ed1c24;
+	color: white !important;
+}
+</style>
+
+
+<style type="text/css">
+#page_navigation3 a {
+	padding: 3px;
+	border: 1px solid gray;
+	margin: 2px;
+	color: black;
+	text-decoration: none
+}
+
+.active_page3 {
+	background: #ed1c24;
+	color: white !important;
+}
+</style>
+
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+
+						var show_per_page3 = 3;
+						//getting the amount of elements inside content div
+						var number_of_items3 = $('#content3').children().size();
+						//calculate the number of pages we are going to have
+						var number_of_pages3 = Math.ceil(number_of_items3
+								/ show_per_page3);
+
+						//set the value of our hidden input fields
+						$('#current_page3').val(0);
+						$('#show_per_page3').val(show_per_page3);
+
+						//now when we got all we need for the navigation let's make it '
+
+						/* 
+						what are we going to have in the navigation?
+							- link to previous page
+							- links to specific pages
+							- link to next page
+						 */
+						var navigation_html3 = '<a class="previous_link3" href="javascript:previous3();">Prev</a>';
+						var current_link3 = 0;
+						while (number_of_pages3 > current_link3) {
+							navigation_html3 += '<a class="page_link3" href="javascript:go_to_page3('
+									+ current_link3
+									+ ')" longdesc3="'
+									+ current_link3
+									+ '">'
+									+ (current_link3 + 1) + '</a>';
+							current_link3++;
+						}
+						navigation_html3 += '<a class="next_link3" href="javascript:next3();">Next</a>';
+
+						$('#page_navigation3').html(navigation_html3);
+
+						//add active_page class to the first page link
+						$('#page_navigation3 .page_link3:first').addClass(
+								'active_page3');
+
+						//hide all the elements inside content div
+						$('#content3').children().css('display', 'none');
+
+						//and show the first n (show_per_page) elements
+						$('#content3').children().slice(0, show_per_page3).css(
+								'display', 'block');
+
+						//how much items per page to show
+						var show_per_page2 = 4;
+						//getting the amount of elements inside content div
+						var number_of_items2 = $('#content2').children().size();
+						//calculate the number of pages we are going to have
+						var number_of_pages2 = Math.ceil(number_of_items2
+								/ show_per_page2);
+
+						//set the value of our hidden input fields
+						$('#current_page2').val(0);
+						$('#show_per_page2').val(show_per_page2);
+
+						//now when we got all we need for the navigation let's make it '
+
+						/* 
+						what are we going to have in the navigation?
+							- link to previous page
+							- links to specific pages
+							- link to next page
+						 */
+						var navigation_html2 = '<a class="previous_link2" href="javascript:previous2();">Prev</a>';
+						var current_link2 = 0;
+						while (number_of_pages2 > current_link2) {
+							navigation_html2 += '<a class="page_link2" href="javascript:go_to_page2('
+									+ current_link2
+									+ ')" longdesc2="'
+									+ current_link2
+									+ '">'
+									+ (current_link2 + 1) + '</a>';
+							current_link2++;
+						}
+						navigation_html2 += '<a class="next_link2" href="javascript:next2();">Next</a>';
+
+						$('#page_navigation2').html(navigation_html2);
+
+						//add active_page class to the first page link
+						$('#page_navigation2 .page_link2:first').addClass(
+								'active_page2');
+
+						//hide all the elements inside content div
+						$('#content2').children().css('display', 'none');
+
+						//and show the first n (show_per_page) elements
+						$('#content2').children().slice(0, show_per_page2).css(
+								'display', 'block');
+
+						var show_per_page1 = 4;
+						//getting the amount of elements inside content div
+						var number_of_items1 = $('#content1').children().size();
+						//calculate the number of pages we are going to have
+						var number_of_pages1 = Math.ceil(number_of_items1
+								/ show_per_page1);
+
+						//set the value of our hidden input fields
+						$('#current_page1').val(0);
+						$('#show_per_page1').val(show_per_page1);
+
+						//now when we got all we need for the navigation let's make it '
+
+						/* 
+						what are we going to have in the navigation?
+							- link to previous page
+							- links to specific pages
+							- link to next page
+						 */
+						var navigation_html1 = '<a class="previous_link1" href="javascript:previous1();">Prev</a>';
+						var current_link1 = 0;
+						while (number_of_pages1 > current_link1) {
+							navigation_html1 += '<a class="page_link1" href="javascript:go_to_page1('
+									+ current_link1
+									+ ')" longdesc1="'
+									+ current_link1
+									+ '">'
+									+ (current_link1 + 1) + '</a>';
+							current_link1++;
+						}
+						navigation_html1 += '<a class="next_link1" href="javascript:next1();">Next</a>';
+
+						$('#page_navigation1').html(navigation_html1);
+
+						//add active_page class to the first page link
+						$('#page_navigation1 .page_link1:first').addClass(
+								'active_page1');
+
+						//hide all the elements inside content div
+						$('#content1').children().css('display', 'none');
+
+						//and show the first n (show_per_page) elements
+						$('#content1').children().slice(0, show_per_page1).css(
+								'display', 'block');
+
+					});
+
+	function previous3() {
+
+		new_page3 = parseInt($('#current_page3').val()) - 1;
+		//if there is an item before the current active link run the function
+		if ($('.active_page3').prev('.page_link3').length == true) {
+			go_to_page3(new_page3);
+		}
+
+	}
+
+	function next3() {
+		new_page3 = parseInt($('#current_page3').val()) + 1;
+		//if there is an item after the current active link run the function
+		if ($('.active_page3').next('.page_link3').length == true) {
+			go_to_page3(new_page3);
+		}
+
+	}
+	function go_to_page3(page_num3) {
+		//get the number of items shown per page
+		var show_per_page3 = parseInt($('#show_per_page3').val());
+
+		//get the element number where to start the slice from
+		start_from3 = page_num3 * show_per_page3;
+
+		//get the element number where to end the slice
+		end_on3 = start_from3 + show_per_page3;
+
+		//hide all children elements of content div, get specific items and show them
+		$('#content3').children().css('display', 'none').slice(start_from3,
+				end_on3).css('display', 'block');
+
+		/*get the page link that has longdesc attribute of the current page and add active_page class to it
+		and remove that class from previously active page link*/
+		$('.page_link3[longdesc3=' + page_num3 + ']').addClass('active_page3')
+				.siblings('.active_page3').removeClass('active_page3');
+
+		//update the current page input field
+		$('#current_page3').val(page_num3);
+	}
+
+	function previous2() {
+
+		new_page2 = parseInt($('#current_page2').val()) - 1;
+		//if there is an item before the current active link run the function
+		if ($('.active_page2').prev('.page_link2').length == true) {
+			go_to_page2(new_page2);
+		}
+	}
+
+	function next2() {
+		new_page2 = parseInt($('#current_page2').val()) + 1;
+		//if there is an item after the current active link run the function
+		if ($('.active_page2').next('.page_link2').length == true) {
+			go_to_page2(new_page2);
+		}
+
+	}
+	function go_to_page2(page_num2) {
+		//get the number of items shown per page
+		var show_per_page2 = parseInt($('#show_per_page2').val());
+
+		//get the element number where to start the slice from
+		start_from2 = page_num2 * show_per_page2;
+
+		//get the element number where to end the slice
+		end_on2 = start_from2 + show_per_page2;
+
+		//hide all children elements of content div, get specific items and show them
+		$('#content2').children().css('display', 'none').slice(start_from2,
+				end_on2).css('display', 'block');
+
+		/*get the page link that has longdesc attribute of the current page and add active_page class to it
+		and remove that class from previously active page link*/
+		$('.page_link2[longdesc2=' + page_num2 + ']').addClass('active_page2')
+				.siblings('.active_page2').removeClass('active_page2');
+
+		//update the current page input field
+		$('#current_page2').val(page_num2);
+	}
+
+	/* *********************** */
+
+	function previous1() {
+
+		new_page1 = parseInt($('#current_page1').val()) - 1;
+		//if there is an item before the current active link run the function
+		if ($('.active_page1').prev('.page_link1').length == true) {
+			go_to_page1(new_page1);
+		}
+	}
+
+	function next1() {
+		new_page1 = parseInt($('#current_page1').val()) + 1;
+		//if there is an item after the current active link run the function
+		if ($('.active_page1').next('.page_link1').length == true) {
+			go_to_page1(new_page1);
+		}
+
+	}
+	function go_to_page1(page_num1) {
+		//get the number of items shown per page
+		var show_per_page1 = parseInt($('#show_per_page1').val());
+
+		//get the element number where to start the slice from
+		start_from1 = page_num1 * show_per_page1;
+
+		//get the element number where to end the slice
+		end_on1 = start_from1 + show_per_page1;
+
+		//hide all children elements of content div, get specific items and show them
+		$('#content1').children().css('display', 'none').slice(start_from1,
+				end_on1).css('display', 'block');
+
+		/*get the page link that has longdesc attribute of the current page and add active_page class to it
+		and remove that class from previously active page link*/
+		$('.page_link1[longdesc1=' + page_num1 + ']').addClass('active_page1')
+				.siblings('.active_page1').removeClass('active_page1');
+
+		//update the current page input field
+		$('#current_page1').val(page_num1);
+	}
+</script>
+
+
+
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script>
+	$(document).ready(
+			function() {
+				$("#message").click(
+						function() {
+							$("#call").slideUp();
+							$("#notify").slideToggle("slow");
+							$(this).find('.notify').toggleClass(
+									'glyphicon-plus').toggleClass(
+									'glyphicon-minus');
+						});
+
+				$("#interview").click(
+						function() {
+							$("#notify").slideUp();
+							$("#call").slideToggle("slow");
+							$(this).find('.inter')
+									.toggleClass('glyphicon-plus').toggleClass(
+											'glyphicon-minus');
+
+						});
+
+				$("#aa1").mouseenter(function() {
+					$("#sociallist").toggleClass("remove");
+					$(".btnopenclose").toggleClass("as_selected");
+				});
+
+				$('.carousel').carousel({
+					interval : 1000
+				});
+			});
+</script>
+
+<link href="css2/slider.css" rel="stylesheet" type="text/css"
+	media="all" />
+
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!--  post new job -->
+<script>
+	$(function() {
+		var availableTags = [ "ActionScript", "AppleScript", "IOS", "Asp",
+				"BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion",
+				"Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript",
+				"Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme","JSP" ];
+		function split(val) {
+			return val.split(/,\s*/);
+		}
+		function extractLast(term) {
+			return split(term).pop();
+		}
+
+		$("#tags")
+		// don't navigate away from the field on tab when selecting an item
+		.on(
+				"keydown",
+				function(event) {
+					if (event.keyCode === $.ui.keyCode.TAB
+							&& $(this).autocomplete("instance").menu.active) {
+						event.preventDefault();
+					}
+				}).autocomplete(
+				{
+					minLength : 0,
+					source : function(request, response) {
+						// delegate back to autocomplete, but extract the last term
+						response($.ui.autocomplete.filter(availableTags,
+								extractLast(request.term)));
+					},
+					focus : function() {
+						// prevent value inserted on focus
+						return false;
+					},
+					select : function(event, ui) {
+						var terms = split(this.value);
+						// remove the current input
+						terms.pop();
+						// add the selected item
+						terms.push(ui.item.value);
+						// add placeholder to get the comma-and-space at the end
+						terms.push("");
+						this.value = terms.join(", ");
+						return false;
+					}
+				});
+	});
+</script>
+<!-- post new job -->
+
+
+<script>
+	function check_empty_field() {
+		var title = document.forms['f1']['title'].value;
+		var score = document.forms['f1']['score'].value;
+		var tags = document.forms['f1']['tags'].value;
+		var educationqualification = document.forms['f1']['educationqualification'].value;
+		var experince = document.forms['f1']['experince'].value;
+		var noofposition = document.forms['f1']['noofposition'].value;
+		var country = document.forms['f1']['country'].value;
+		var state = document.forms['f1']['state'].value;
+		var city = document.forms['f1']['city'].value;
+
+		/*  if (title==null || title=="",score==null || score=="",tags==null || tags=="",educationqualification==null || educationqualification=="",experince==null || experince=="",noofposition==null || noofposition=="",country==null || country=="",state==null || state=="",city==null || city=="")
+		 {
+		 alert("Please Fill All Required Field");
+		 }
+		*/
+		var check = document.forms['f1']['check'].value;
+
+		if (check == "objective") {
+			window.location = "setObjectiveQuestion.html";
+		}
+
+		if (check == "subjective") {
+			window.location = "setSubjectiveQuestion.html";
+		}
+	}
+</script>
+
+<!-- <script>
+    $(document).ready(function() {
+        function disableBack() { window.history.forward() }
+
+        window.onload = disableBack();
+        window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+    });
+</script> -->
+<!--  post job post -->
+
+<!-- for disable back button -->
+<SCRIPT type="text/javascript">
+    window.history.forward();
+    function noBack() { window.history.forward(); }
+</SCRIPT>
+</head>
+</head>
+
+<%
+	Connection conn = null;
+	try {
+		conn = new DConnection().getConnection();
+	} catch (Exception e) {
+	}
+%>
+
+
+<!-- to set null value in session which is related notsetans , objectivequestion ,subjectivequestion -->
+<%
+	if (session.getAttribute("notsetans") != null) {
+		String nosetans = null;
+		session.setAttribute("notsetans", nosetans);
+	}
+
+	if (session.getAttribute("objectivequestion") != null) {
+		String objectivequestion = null;
+		session.setAttribute("objectivequestion", objectivequestion);
+	}
+
+	if (session.getAttribute("subjectivequestion") != null) {
+		String subjectivequestion = null;
+		session.setAttribute("subjectivequestion", subjectivequestion);
+	}
+%>
+
+
+<!-- close task -->
+
+
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top"
+	style="background-image: url('images/webapp.jpg');"  onload="noBack();"
+    onpageshow="if (event.persisted) noBack();"> 
+	<!-- header -->
+
+	<div class="header-w3layouts" style="height: 80px;">
+		<!-- Navigation -->
+		<%@include file="common/header.jsp"%>
+	</div>
+	<!-- //header -->
+
+	<!-- 		change password -->
+
+	<!-- 		change password -->
+
+
+	<!-- 	start social media -->
+	<div id="socialarea">
+		<ul id="sociallist">
+			<li class="facebook_social"><a href="#" target="_new"><img
+					src="socialmediaimage/about.png" class="img-circle"
+					style="width: 30px; padding: 2px;"></a></li>
+			<li class="twitter_social"><a href="#" target="_new"><img
+					src="socialmediaimage/support.png" class="img-circle"
+					style="width: 30px; padding: 2px;"></a></li>
+			<li class="googleplus_social"><a href="#" target="_new"><img
+					src="socialmediaimage/blog.png" class="img-circle"
+					style="width: 30px; padding: 2px;"></a></li>
+			<li class="pinterest_social"><a href="#" target="_new"><img
+					src="socialmediaimage/youtube.png" class="img-circle"
+					style="width: 30px; padding: 2px;"></a></li>
+			<li class="linkedin_social" id="more"><a href="#"><img
+					src="socialmediaimage/social.png" class="img-circle"
+					style="width: 30px; padding: 2px;"></a>
+				<ul id="sociallist1" style="display: none;">
+					<li class="facebook_social"><a href="#" target="_new"><img
+							src="socialmediaimage/facebook.jpg" class="img-circle"
+							style="width: 30px; padding: 2px;"></a></li>
+					<li class="twitter_social"><a href="#" target="_new"><img
+							src="socialmediaimage/linkedin.png" class="img-circle"
+							style="width: 30px; padding: 2px;"></a></li>
+					<li class="googleplus_social"><a href="#" target="_new"><img
+							src="socialmediaimage/googlplus.jpg" class="img-circle"
+							style="width: 30px; padding: 2px;"></a></li>
+					<li class="pinterest_social"><a href="#" target="_new"><img
+							src="socialmediaimage/instrgram.png" class="img-circle"
+							style="width: 30px; padding: 2px;"></a></li>
+				</ul></li>
+		</ul>
+		<div class="btnopenclose">
+			<a id="aa1" class="arrow_social"><i class="fa fa-angle-left"></i></a>
+		</div>
+	</div>
+	<!--  end social media -->
+
+
+	<!-- 	start container -->
+
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+				<!--  start profile -->
+				<div class="profile">
+					<div class="panel">
+						<div class="panel-body">
+
+
+
+							<form class="form-horizontal" role="form" name="f1">
+								<fieldset>
+									<legend>Post New Job :- Section1</legend>
+									<%
+										if (session.getAttribute("finalsubmit") != null) {
+									%>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-12 col-md-12 col-sm-12">
+												<label for="firstname" class="control-label i1"
+													style="margin-left: 10px; font-size: 17px;"><%=session.getAttribute("finalsubmit").toString()%></label>
+											</div>
+										</div>
+									</div>
+									<%
+										String finalsubmit = null;
+											session.setAttribute("finalsubmit", finalsubmit);
+										}
+									%>
+									<br>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-3 col-md-3 col-sm-3">
+												<label for="firstname" class="control-label i1"
+													style="margin-left: 10px; font-size: 17px;">Title</label>
+											</div>
+											<div class="col-lg-7 col-md-7 col-sm-7">
+												<div class="input-group">
+													<span class="input-group-addon input1"><i
+														class="glyphicon glyphicon-text-size"></i></span> <input
+														type='text' name="title" id="title"
+														placeholder="Enter Title" class='form-control input1'
+														required>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-3 col-md-3 col-sm-3">
+												<label for="lastname" class="control-label i1"
+													style="margin-left: 10px; font-size: 17px;">Apptitude
+													Score</label>
+											</div>
+											<div class="col-lg-7 col-md-7 col-sm-7">
+												<div class="input-group">
+													<span class="input-group-addon input1"><i
+														class="glyphicon glyphicon-certificate"></i></span> <select
+														class="form-control input1" id="score" name="score"
+														required>
+														<option value="" class="input1">Select Score</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+														<option value="6">6</option>
+														<option value="7">7</option>
+														<option value="8">8</option>
+														<option value="9">9</option>
+														<option value="10">10</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-3 col-md-3 col-sm-3">
+												<label for="firstname" class="control-label i1"
+													style="margin-left: 10px; font-size: 17px;">Skills</label>
+											</div>
+											<div class="col-lg-7 col-md-7 col-sm-7">
+												<div class="input-group">
+													<span class="input-group-addon input1"><i
+														class="glyphicon glyphicon-pencil"></i></span> <input type='text'
+														name="tags" id="tags" placeholder="Enter Skill"
+														class='form-control input1' required>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-3 col-md-3 col-sm-3">
+												<label for="lastname" class="control-label i1"
+													style="font-size: 17px;">Qulification</label>
+											</div>
+											<div class="col-lg-7 col-md-7 col-sm-7">
+												<div class="input-group">
+													<span class="input-group-addon input1"><i
+														class="glyphicon glyphicon-education"></i></span> <select
+														class="form-control input1" id="educationqualification"
+														name="educationqualification" required>
+														<option value="" class="input1">Select
+															Qulification</option>
+														<option value="105">S.S.C</option>
+														<option value="106">H.S.C.</option>
+														<option value="107">B.sc</option>
+														<option value="108">M.sc</option>
+														<option value="109">M.C.A.</option> 
+														<option value="110">M.B.A.</option>
+														<option value="111">B.E.</option>
+														<option value="112">B.Tech</option>
+														<option value="113">M.Tech</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+									<input type="submit" name="Save & Next"
+										class="next action-button btn btn-danger" value="Next"
+										onclick="f1.action='NewJobPost_Section2.jsp'" /> <br>
+									<br>
+								</fieldset>
+
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+				<!-- start right sidebar -->
+				<div class="rightsidebar">
+
+					<!--  start side bar -->
+					<div class="row">
+
+						<!--    start notification -->
+
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="row">
+								<div class="col-lg-11 col-md-11 col-sm-11">
+									<div class="notification" id="message"
+										style="margin-bottom: 5px;">
+										<span class="glyphicon glyphicon-plus notify"
+											style="margin-left: 25px;"></span>&nbsp;<font>Notification</font>
+									</div>
+
+
+									<div id="notify" style="display: none;">
+										<div id='content2'>
+											<div class="panel panel1">
+												<div class="panel-heading" style="padding: 2px 25px;">
+													<p class="panel-title">Java Devoloper</p>
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading" style="padding: 2px 25px;">
+													<p class="panel-title">Java Devoloper</p>
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading" style="padding: 2px 25px;">
+													<p class="panel-title">Java Devoloper</p>
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading" style="padding: 2px 25px;">
+													<p class="panel-title">Java Devoloper</p>
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading" style="padding: 2px 25px;">
+													<p class="panel-title">Java Devoloper</p>
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+										</div>
+
+										<center>
+											<input type='hidden' id='current_page2' /> <input
+												type='hidden' id='show_per_page2' />
+											<div id='page_navigation2' style="margin: 10px;"></div>
+										</center>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+
+						<!--  end notification -->
+
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="row">
+								<div class="col-lg-11 col-md-11 col-sm-11">
+									<div class="notification" id="interview"
+										style="margin-bottom: 5px;">
+										<span class="glyphicon glyphicon-plus inter"
+											style="margin-left: 25px;"></span>&nbsp;Interview call
+									</div>
+
+									<div id="call" style="display: none;">
+										<div id='content1'>
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading"
+													style="padding: 2px 25px; background-color: rgba(255, 255, 255, .15);">
+													<img src="images/trab.png"
+														style="width: 30px; height: 30px;" class="img-rounded">Amit
+													Yadav
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading"
+													style="padding: 2px 25px; background-color: rgba(255, 255, 255, .15);">
+													<img src="images/trab.png"
+														style="width: 30px; height: 30px;" class="img-rounded">Amit
+													Yadav
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading"
+													style="padding: 2px 25px; background-color: rgba(255, 255, 255, .15);">
+													<img src="images/trab.png"
+														style="width: 30px; height: 30px;" class="img-rounded">Amit
+													Yadav
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading"
+													style="padding: 2px 25px; background-color: rgba(255, 255, 255, .15);">
+													<img src="images/trab.png"
+														style="width: 30px; height: 30px;" class="img-rounded">Amit
+													Yadav
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+											<div class="panel" style="margin-left: 18px; width: 250px;">
+												<div class="panel-heading"
+													style="padding: 2px 25px; background-color: rgba(255, 255, 255, .15);">
+													<img src="images/trab.png"
+														style="width: 30px; height: 30px;" class="img-rounded">Amit
+													Yadav
+												</div>
+												<div class="panel-footer" style="height: 35px;">
+													29-06-2017 11-20-40 AM</div>
+											</div>
+
+
+										</div>
+
+										<center>
+											<input type='hidden' id='current_page1' /> <input
+												type='hidden' id='show_per_page1' />
+											<div id='page_navigation1' style="margin: 10px;"></div>
+										</center>
+									</div>
+
+
+
+								</div>
+
+							</div>
+						</div>
+
+
+
+						<!--  to display latest news -->
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="row">
+								<div class="col-lg-12 col-md-12 col-sm-12">
+									<div class="newsbox">
+										<p class="h4" style="margin-left: 10px;">Latest News</p>
+										<div id='content3'>
+
+											<div>
+												<div class="panel newstyle">
+													<img src="images/icon.png"
+														style="width: 50px; height: 50px; margin-left: 10px;"
+														class="img-responsive">
+													<p class="h4" style="margin-left: 10px;">Web developer</p>
+													<p class="h5" style="margin-left: 10px;">
+														Designscape &nbsp;<br>Mumbai, IN<a href="#"
+															style="float: right; margin-right: 3px; color: #ff1a1a;">Read
+															More</a>
+													</p>
+													<p class="h6" style="margin-left: 10px;">3 weeks ago</p>
+												</div>
+											</div>
+
+											<div>
+												<div class="panel newstyle">
+													<img src="images/back1.png"
+														style="width: 50px; height: 50px; margin-left: 10px;"
+														class="img-responsive">
+													<p class="h4" style="margin-left: 10px;">Android
+														developer</p>
+													<p class="h5" style="margin-left: 10px;">
+														Designscape &nbsp;<br>Navi Mumbai, IN<a href="#"
+															style="float: right; margin-right: 3px; color: #ff1a1a;">Read
+															More</a>
+													</p>
+													<p class="h6" style="margin-left: 10px;">1 day ago</p>
+												</div>
+											</div>
+
+											<div>
+												<div class="panel newstyle">
+													<img src="images/icon.png"
+														style="width: 50px; height: 50px; margin-left: 10px;"
+														class="img-responsive">
+													<p class="h4" style="margin-left: 10px;">iOS developer</p>
+													<p class="h5" style="margin-left: 10px;">
+														Designscape &nbsp;<br>Thane, IN<a href="#"
+															style="float: right; margin-right: 3px; color: #ff1a1a;">Read
+															More</a>
+													</p>
+													<p class="h6" style="margin-left: 10px;">4 weeks ago</p>
+												</div>
+											</div>
+
+										</div>
+
+										<center>
+											<input type='hidden' id='current_page3' /> <input
+												type='hidden' id='show_per_page3' />
+											<div id='page_navigation3' style="margin: 10px;"></div>
+										</center>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+					<!-- start side bar -->
+
+
+				</div>
+				<!--  end right sidebar -->
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!--  end container -->
+
+
+	<!-- PopUp-Box-JavaScript -->
+	<script src="js/jquery.chocolat.js"></script>
+	<script type="text/javascript">
+			$(function() {
+				$('.filtr-item a').Chocolat();
+			});
+		</script>
+	<!-- //PopUp-Box-JavaScript -->
+	<!-- fliter-JavaScript -->
+	<script src="js/jquery.filterizr.js"></script>
+	<script src="js/controls.js"></script>
+	<script type="text/javascript">
+			$(function() {
+				$('.filtr-container').filterizr();
+			});
+		</script>
+	<!-- //fliter-JavaScript -->
+	<script src="js/jarallax.js"></script>
+	<script src="js/SmoothScroll.min.js"></script>
+	<script type="text/javascript">
+	/* init Jarallax */
+	$('.jarallax').jarallax({
+		speed: 0.5,
+		imgWidth: 1366,
+		imgHeight: 768
+	})
+</script>
+	<!-- start-smoth-scrolling -->
+	<script type="text/javascript" src="js/easing.js"></script>
+	<!-- //here ends scrolling icon -->
+
+
+</body>
+</html>
+
+
+<!-- This page update by mitali and supriya date 10/10/2017 -->
