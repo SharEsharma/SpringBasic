@@ -9,6 +9,7 @@
   <body>
     <h2>Spring3MVC with Hibernate3 CRUD Example using Annotations</h2>
     <h2>1.<a href="employees.html">List of Employees</a></h2>
+    <h2>2.<a href="employees.html">List of Employees</a></h2>
     
   </body>
 </html>

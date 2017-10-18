@@ -52,3 +52,9 @@
 0:0:0:0:0:0:0:1 - - [18/Oct/2017:15:15:14 +0530] "GET /Xenture/index.html HTTP/1.1" 200 461
 0:0:0:0:0:0:0:1 - - [18/Oct/2017:15:15:15 +0530] "GET /Xenture/employees.html HTTP/1.1" 200 249
 0:0:0:0:0:0:0:1 - - [18/Oct/2017:15:15:16 +0530] "GET /Xenture/index.html HTTP/1.1" 200 461
+127.0.0.1 - - [18/Oct/2017:15:16:26 +0530] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [18/Oct/2017:15:16:29 +0530] "GET /Xenture/ HTTP/1.1" 200 460
+127.0.0.1 - - [18/Oct/2017:15:16:31 +0530] "GET /Xenture/ HTTP/1.1" 200 460
+127.0.0.1 - - [18/Oct/2017:15:16:32 +0530] "GET /Xenture/employees.html HTTP/1.1" 200 249
+127.0.0.1 - - [18/Oct/2017:15:16:34 +0530] "GET /Xenture/employees.html HTTP/1.1" 200 249
+127.0.0.1 - - [18/Oct/2017:15:16:35 +0530] "GET /Xenture/index.html HTTP/1.1" 200 460
